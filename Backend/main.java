@@ -22,8 +22,8 @@ public class main {
             folder.mkdirs(); // Create subfolder if it doesn't exist
         }
 
-        String filename = "DAAR_projet1/Backend/tests/NDFA/" + regex + ".dot";
-        NDFA.toDotFile(filename);
+        String filename = "DAAR_projet1/Backend/tests/NDFA/" + regex + ".json";
+        NDFA.toJsonFile(filename);
 
         System.out.println("dot created.");
     }

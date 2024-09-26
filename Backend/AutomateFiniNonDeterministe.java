@@ -150,47 +150,93 @@ public class AutomateFiniNonDeterministe {
         return etatInitial.toString();
     }
 
-    // ! Dot for tests only
-    public void toDotFile(String filename) {
+    public void toJsonFile(String filename) {
         try (FileWriter writer = new FileWriter(filename)) {
-            writer.write("digraph NDFA {\n");
-            writer.write("  rankdir=LR;\n"); // Left to Right orientation
-            writer.write("  node [shape = circle];\n");
+            // Create lists for nodes and links
+            List<Map<String, String>> nodes = new ArrayList<>();
+            List<Map<String, String>> links = new ArrayList<>();
 
-            // Add all states and transitions
+            // Add all states and transitions to the lists
             Set<Etat> visites = new HashSet<>();
-            writeEtatToDot(etatInitial, writer, visites);
+            collectEtatForJson(etatInitial, nodes, links, visites);
 
-            // Mark initial and accepting states
-            writer.write("  \"" + etatInitial.id + "\" [shape = doublecircle, label=\"" + etatInitial.id + "\"];\n");
-            writer.write("  \"" + etatAcceptant.id + "\" [shape = doublecircle, style=bold, label=\"" + etatAcceptant.id
-                    + "\"];\n");
+            // Start writing the JSON structure
+            writer.write("{\n");
+
+            // Write nodes
+            writer.write("  \"nodes\": [\n");
+            for (int i = 0; i < nodes.size(); i++) {
+                Map<String, String> node = nodes.get(i);
+                StringBuilder nodeJson = new StringBuilder();
+                nodeJson.append("    { \"id\": \"" + node.get("id") + "\"");
+
+                // Check if the node is the initial or accepting state
+                if (node.get("id").equals(String.valueOf(etatInitial.id))) {
+                    nodeJson.append(", \"type\": \"initial\"");
+                }
+                if (node.get("id").equals(String.valueOf(etatAcceptant.id))) {
+                    nodeJson.append(", \"type\": \"accepting\"");
+                }
+
+                nodeJson.append(" }");
+                writer.write(nodeJson.toString());
+                if (i < nodes.size() - 1)
+                    writer.write(",");
+                writer.write("\n");
+            }
+            writer.write("  ],\n");
+
+            // Write links
+            writer.write("  \"links\": [\n");
+            for (int i = 0; i < links.size(); i++) {
+                Map<String, String> link = links.get(i);
+                writer.write("    { \"source\": \"" + link.get("source") + "\", \"target\": \"" + link.get("target")
+                        + "\", \"label\": \"" + link.get("label") + "\" }");
+                if (i < links.size() - 1)
+                    writer.write(",");
+                writer.write("\n");
+            }
+            writer.write("  ]\n");
 
             writer.write("}\n");
         } catch (IOException e) {
-            System.err.println("Erreur lors de l'écriture du fichier Dot: " + e.getMessage());
+            System.err.println("Erreur lors de l'écriture du fichier JSON: " + e.getMessage());
         }
     }
 
-    // Helper function to recursively write states and transitions
-    // Proposée par ChatGPT
-    private void writeEtatToDot(Etat etat, FileWriter writer, Set<Etat> visites) throws IOException {
+    // Helper function to recursively collect states and transitions for JSON
+    private void collectEtatForJson(Etat etat, List<Map<String, String>> nodes, List<Map<String, String>> links,
+            Set<Etat> visites) {
         if (!visites.add(etat))
             return; // Skip already visited states
 
-        // Write all transitions for this state
+        // Add the current state to the nodes list
+        Map<String, String> node = new HashMap<>();
+        node.put("id", String.valueOf(etat.id)); // Ensure the ID is a String
+        nodes.add(node);
+
+        // Add all transitions for this state to the links list
         for (Map.Entry<Integer, Set<Etat>> entry : etat.transitions.entrySet()) {
             int symbol = entry.getKey();
             for (Etat suivant : entry.getValue()) {
-                writer.write("  \"" + etat.id + "\" -> \"" + suivant.id + "\" [label=\"" + (char) symbol + "\"];\n");
-                writeEtatToDot(suivant, writer, visites); // Recursively process the next state
+                Map<String, String> link = new HashMap<>();
+                link.put("source", String.valueOf(etat.id)); // Ensure source is a String
+                link.put("target", String.valueOf(suivant.id)); // Ensure target is a String
+                link.put("label", String.valueOf((char) symbol)); // Ensure label is a String
+                links.add(link);
+                collectEtatForJson(suivant, nodes, links, visites); // Recursively process the next state
             }
         }
 
-        // Write epsilon transitions
+        // Add epsilon transitions to the links list
         for (Etat suivant : etat.transitionsEpsilon) {
-            writer.write("  \"" + etat.id + "\" -> \"" + suivant.id + "\" [label=\"EPSILON\"];\n");
-            writeEtatToDot(suivant, writer, visites); // Recursively process the next state
+            Map<String, String> link = new HashMap<>();
+            link.put("source", String.valueOf(etat.id)); // Ensure source is a String
+            link.put("target", String.valueOf(suivant.id)); // Ensure target is a String
+            link.put("label", "ε"); // Epsilon is already a String
+            links.add(link);
+            collectEtatForJson(suivant, nodes, links, visites); // Recursively process the next state
         }
     }
+
 }

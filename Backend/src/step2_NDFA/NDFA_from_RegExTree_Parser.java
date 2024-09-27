@@ -1,10 +1,10 @@
-package src.step2_TreeToNDFA;
+package src.step2_NDFA;
 
-import src.step1_RegExToTree.RegExTree_from_RegEx_Parser;
-import src.step1_RegExToTree.RegExTree_Struct;
+import src.step1_RegExTreeConversion.RegExTree_from_RegEx_Parser;
+import src.step1_RegExTreeConversion.RegExTree_Struct;
 
 /**
- * The {@code NDFA_from_RegExTree_Parser} class is responsible for converting a regular expression
+ * The {@code DFA_Determinisation} class is responsible for converting a regular expression
  * syntax tree (represented by {@code RegExTree_Struct}) into a Non-Deterministic Finite Automaton (NDFA).
  *
  * <p>This class processes the structure of the regular expression tree, handling basic regex operations
@@ -31,7 +31,7 @@ public class NDFA_from_RegExTree_Parser {
      * </p>
      *
      * @param arbreRegEx The regular expression syntax tree to be converted into an NDFA.
-     * @return An {@code NDFA_Struct} representing the generated NDFA from the regular expression tree.
+     * @return An {@code DFA_Struct} representing the generated NDFA from the regular expression tree.
      */
     public static NDFA_Struct parseTreeToNDFA(RegExTree_Struct arbreRegEx) {
         // Handle individual character or wildcard (DOT)

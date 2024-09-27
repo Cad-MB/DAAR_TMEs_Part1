@@ -1,11 +1,9 @@
-package src.step2_TreeToNDFA;
+package src.step2_NDFA;
 
 import java.util.*;
-import java.io.FileWriter;
-import java.io.IOException;
 
 /**
- * The {@code NDFA_Struct} class represents a Non-Deterministic Finite Automaton (NDFA).
+ * The {@code DFA_Struct} class represents a Non-Deterministic Finite Automaton (NDFA).
  * This class provides methods to build and visualize an NDFA, as well as create states
  * and transitions based on regular expressions parsed from a syntax tree.
  *

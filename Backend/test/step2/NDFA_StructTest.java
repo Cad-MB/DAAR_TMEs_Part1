@@ -2,14 +2,14 @@ package test.step2;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import src.step2_TreeToNDFA.NDFA_Struct;
+import src.step2_NDFA.NDFA_Struct;
 
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Unit tests for the {@code NDFA_Struct} and its inner class {@code Etat}.
+ * Unit tests for the {@code DFA_Struct} and its inner class {@code Etat}.
  */
 public class NDFA_StructTest {
 

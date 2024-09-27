@@ -1,4 +1,4 @@
-package src.step1_RegExToTree;
+package src.step1_RegExTreeConversion;
 
 import java.util.ArrayList;
 

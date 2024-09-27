@@ -2,19 +2,18 @@ package test.step2;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import src.step1_RegExToTree.RegExTree_Struct;
-import src.step1_RegExToTree.RegExTree_from_RegEx_Parser;
-import src.step2_TreeToNDFA.NDFA_Struct;
-import src.step2_TreeToNDFA.NDFA_from_RegExTree_Parser;
+import src.step1_RegExTreeConversion.RegExTree_Struct;
+import src.step1_RegExTreeConversion.RegExTree_from_RegEx_Parser;
+import src.step2_NDFA.NDFA_Struct;
+import src.step2_NDFA.NDFA_from_RegExTree_Parser;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Unit tests for the {@code NDFA_from_RegExTree_Parser} class.
+ * Unit tests for the {@code DFA_Determinisation} class.
  * These tests validate the conversion of regular expression syntax trees to NDFAs.
  */
 public class NDFA_from_RegExTree_ParserTest {

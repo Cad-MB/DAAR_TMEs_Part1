@@ -1,6 +1,6 @@
-package src.step2_TreeToNDFA.graphics;
+package src.step2_NDFA.graphics;
 
-import src.step2_TreeToNDFA.NDFA_Struct;
+import src.step2_NDFA.NDFA_Struct;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -85,7 +85,7 @@ public class NDFA_JSON_Exporter {
      * @param visites A set of visited states to prevent infinite loops.
      * @param ndfa The NDFA structure, used to identify initial and accepting states.
      */
-    private void collectEtatForJson(NDFA_Struct.Etat etat, List<Map<String, String>> nodes, List<Map<String, String>> links,
+    public void collectEtatForJson(NDFA_Struct.Etat etat, List<Map<String, String>> nodes, List<Map<String, String>> links,
                                     Set<NDFA_Struct.Etat> visites, NDFA_Struct ndfa) {
         if (!visites.add(etat))
             return; // Skip already visited states

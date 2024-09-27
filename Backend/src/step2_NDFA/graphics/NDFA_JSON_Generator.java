@@ -1,9 +1,10 @@
-package src.step2_TreeToNDFA.graphics;
+package src.step2_NDFA.graphics;
 
-import src.step1_RegExToTree.RegExTree_Struct;
-import src.step1_RegExToTree.RegExTree_from_RegEx_Parser;
-import src.step2_TreeToNDFA.NDFA_Struct;
-import src.step2_TreeToNDFA.NDFA_from_RegExTree_Parser;
+import src.step1_RegExTreeConversion.RegExTree_Struct;
+import src.step1_RegExTreeConversion.RegExTree_from_RegEx_Parser;
+import src.step2_NDFA.NDFA_Struct;
+import src.step2_NDFA.NDFA_from_RegExTree_Parser;
+import src.step2_NDFA.graphics.NDFA_JSON_Exporter;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -20,12 +21,12 @@ import java.io.IOException;
  */
 public class NDFA_JSON_Generator {
 
-    private static NDFA_Struct ndfa;
+    protected static NDFA_Struct ndfa;
 
     /**
      * Resets the state ID counter before generating a new NDFA.
      */
-    private static void resetStateCounter() {
+    protected static void resetStateCounter() {
         NDFA_Struct.Etat.compteur = 0;
     }
 
@@ -99,8 +100,8 @@ public class NDFA_JSON_Generator {
      */
     public static void main(String[] args) {
         // Define the input and output paths in the "src.step2_TreeToNDFA.graphics" directory
-        String inputFilePath = "Backend/src/step2_TreeToNDFA/graphics/Samples/regex_list.csv";
-        String outputFolderPath = "Backend/src/step2_TreeToNDFA/graphics/Samples";
+        String inputFilePath = "Backend/src/step2_NDFA/graphics/Samples/regex_list.csv";
+        String outputFolderPath = "Backend/src/step2_NDFA/graphics/Samples";
 
         processRegexFile(inputFilePath, outputFolderPath);
     }

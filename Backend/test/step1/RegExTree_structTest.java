@@ -1,8 +1,8 @@
 package test.step1;
 
 import org.junit.jupiter.api.Test;
-import src.step1_RegExToTree.RegExTree_Struct;
-import src.step1_RegExToTree.RegExTree_from_RegEx_Parser;
+import src.step1_RegExTreeConversion.RegExTree_Struct;
+import src.step1_RegExTreeConversion.RegExTree_from_RegEx_Parser;
 
 import java.util.ArrayList;
 import java.util.List;

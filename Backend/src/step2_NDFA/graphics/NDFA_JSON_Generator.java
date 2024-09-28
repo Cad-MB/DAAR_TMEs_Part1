@@ -4,7 +4,6 @@ import src.step1_RegExTreeConversion.RegExTree_Struct;
 import src.step1_RegExTreeConversion.RegExTree_from_RegEx_Parser;
 import src.step2_NDFA.NDFA_Struct;
 import src.step2_NDFA.NDFA_from_RegExTree_Parser;
-import src.step2_NDFA.graphics.NDFA_JSON_Exporter;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -43,6 +42,7 @@ public class NDFA_JSON_Generator {
         RegExTree_Struct parsedRegex = RegExTree_from_RegEx_Parser.parse(regEx);
 
         // Convert the parsed regular expression into an NDFA
+        assert parsedRegex != null;
         ndfa = NDFA_from_RegExTree_Parser.parseTreeToNDFA(parsedRegex);
     }
 
@@ -77,7 +77,6 @@ public class NDFA_JSON_Generator {
                 // Build NDFA from the current regex line
                 buildNDFAFromRegex(line.trim());
 
-                // Define the JSON file name (using an index to avoid issues with special characters)
                 String filename = outputFolderPath + "/NDFA_Sample_" + regexIndex + ".json";
                 regexIndex++;
 
@@ -95,11 +94,10 @@ public class NDFA_JSON_Generator {
 
     /**
      * Main method to execute the conversion from regular expressions to NDFA.
-     *
+     * <p>
      * The input CSV file and output folder are both in {@code src.step2_TreeToNDFA.graphics}.
      */
     public static void main(String[] args) {
-        // Define the input and output paths in the "src.step2_TreeToNDFA.graphics" directory
         String inputFilePath = "Backend/src/step2_NDFA/graphics/Samples/regex_list.csv";
         String outputFolderPath = "Backend/src/step2_NDFA/graphics/Samples";
 

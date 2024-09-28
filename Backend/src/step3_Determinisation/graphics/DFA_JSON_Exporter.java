@@ -1,7 +1,6 @@
 package src.step3_Determinisation.graphics;
 
 import src.step2_NDFA.NDFA_Struct;
-import src.step3_Determinisation.DFA_Struct;
 import src.step2_NDFA.graphics.NDFA_JSON_Exporter;
 
 import java.util.*;
@@ -54,8 +53,18 @@ public class DFA_JSON_Exporter extends NDFA_JSON_Exporter {
                 link.put("source", String.valueOf(etat.id)); // Ensure source is a String
                 link.put("target", String.valueOf(suivant.id)); // Ensure target is a String
                 link.put("label", String.valueOf((char) symbol)); // Ensure label is a String
+
+                // Handle loop detection: if the source and target states are the same, it's a loop
+                if (etat.equals(suivant)) {
+                    link.put("type", "loop");
+                }
+
                 links.add(link);
-                collectEtatForJson(suivant, nodes, links, visites, dfa); // Recursively process the next state
+
+                // Avoid revisiting self-loops unnecessarily
+                if (!etat.equals(suivant)) {
+                    collectEtatForJson(suivant, nodes, links, visites, dfa); // Recursively process the next state
+                }
             }
         }
     }

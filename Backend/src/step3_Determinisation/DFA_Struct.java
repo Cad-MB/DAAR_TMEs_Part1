@@ -25,6 +25,19 @@ public class DFA_Struct extends NDFA_Struct {
      */
     public static class Etat extends NDFA_Struct.Etat {
 
+
+        private String name;
+
+        // Constructor that accepts a name for the state
+        public Etat(String name) {
+            super(); // Call the parent constructor to set the ID
+            this.name = name; // Set the custom name
+        }
+
+        @Override
+        public String toString() {
+            return "State ID: " + id + ", Name: " + name;
+        }
         /**
          * Constructs a new DFA state with a unique ID.
          */

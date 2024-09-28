@@ -116,7 +116,7 @@ public class RegExTree_from_RegEx_Parser {
       return PARENTHESEOUVRANT;
     if (c == ')')
       return PARENTHESEFERMANT;
-    return (int) c;
+    return c;
   }
 
   /**
@@ -275,7 +275,7 @@ public class RegExTree_from_RegEx_Parser {
         result.add(t);
         continue;
       }
-      if (!found && firstFound && t.root != ALTERN) {
+      if (!found && firstFound) {
         found = true;
         RegExTree_Struct last = result.removeLast();
         ArrayList<RegExTree_Struct> subTrees = new ArrayList<RegExTree_Struct>();
@@ -366,8 +366,8 @@ public class RegExTree_from_RegEx_Parser {
    * @return A {@code RegExTree_Struct} representing the example syntax tree.
    */
   private static RegExTree_Struct exampleAhoUllman() {
-    RegExTree_Struct a = new RegExTree_Struct((int) 'a', new ArrayList<>());
-    RegExTree_Struct b = new RegExTree_Struct((int) 'b', new ArrayList<>());
+    RegExTree_Struct a = new RegExTree_Struct('a', new ArrayList<>());
+    RegExTree_Struct b = new RegExTree_Struct('b', new ArrayList<>());
     RegExTree_Struct c = new RegExTree_Struct((int) 'c', new ArrayList<>());
     ArrayList<RegExTree_Struct> subTrees = new ArrayList<>();
     subTrees.add(c);
@@ -381,4 +381,8 @@ public class RegExTree_from_RegEx_Parser {
     subTrees.add(dotBCEtoile);
     return new RegExTree_Struct(ALTERN, subTrees);
   }
+
+    public static void setRegEx(String regEx) {
+        RegExTree_from_RegEx_Parser.regEx = regEx;
+    }
 }

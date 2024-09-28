@@ -46,7 +46,7 @@ public class RegExTree_Struct {
      */
     public RegExTree_Struct(int root) {
         this.root = root;
-        this.subTrees = new ArrayList<RegExTree_Struct>();
+        this.subTrees = new ArrayList<>();
     }
 
     /**

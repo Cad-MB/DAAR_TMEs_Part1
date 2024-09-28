@@ -6,8 +6,8 @@ import src.step1_RegExTreeConversion.RegExTree_Struct;
 import src.step1_RegExTreeConversion.RegExTree_from_RegEx_Parser;
 import src.step2_NDFA.NDFA_Struct;
 import src.step2_NDFA.NDFA_from_RegExTree_Parser;
-import src.step3_Determinisation.DFA_Determinisation;
-import src.step3_Determinisation.DFA_Struct;
+import src.step3_DFA.DFA_Determinisation;
+import src.step3_DFA.DFA_Struct;
 
 import static org.junit.jupiter.api.Assertions.*;
 

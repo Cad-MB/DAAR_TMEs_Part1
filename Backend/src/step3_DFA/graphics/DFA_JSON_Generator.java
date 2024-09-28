@@ -1,9 +1,9 @@
-package src.step3_Determinisation.graphics;
+package src.step3_DFA.graphics;
 
 import src.step2_NDFA.NDFA_Struct;
 import src.step2_NDFA.graphics.NDFA_JSON_Generator;
-import src.step3_Determinisation.DFA_Determinisation;
-import src.step3_Determinisation.DFA_Struct;
+import src.step3_DFA.DFA_Determinisation;
+import src.step3_DFA.DFA_Struct;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -13,14 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The {@code DFA_JSON_Generator} class reads regular expressions from a CSV-like file,
+ * The {@code DFAMinimized_JSON_Generator} class reads regular expressions from a CSV-like file,
  * converts each expression into an NDFA, determinizes the NDFA into a DFA, and exports the DFA as a JSON file.
  * This class extends the functionality of {@code NDFA_JSON_Generator}.
  */
 public class DFA_JSON_Generator extends NDFA_JSON_Generator {
 
-    private static List<String> regexList = new ArrayList<>();  // Store the list of regular expressions
-    private static DFA_Struct dfa;
+    private static final List<String> regexList = new ArrayList<>();  // Store the list of regular expressions
 
     /**
      * Override the method to build a DFA from a regular expression by first creating an NDFA and then determinizing it.
@@ -37,9 +36,8 @@ public class DFA_JSON_Generator extends NDFA_JSON_Generator {
         buildNDFAFromRegex(regEx);  // This builds the NDFA and stores it in the superclass
 
         // Determinize the NDFA into a DFA
-        dfa = DFA_Determinisation.determinise(getNDFA());
 
-        return dfa;  // Return the determinized DFA
+        return DFA_Determinisation.determinise(getNDFA());  // Return the determinized DFA
     }
 
     /**
@@ -47,7 +45,7 @@ public class DFA_JSON_Generator extends NDFA_JSON_Generator {
      *
      * @return The NDFA_Struct created by the superclass.
      */
-    private static NDFA_Struct getNDFA() {
+    public static NDFA_Struct getNDFA() {
         // Access the NDFA that was created in the superclass (since it's static in the superclass)
         return ndfa;
     }
@@ -58,12 +56,12 @@ public class DFA_JSON_Generator extends NDFA_JSON_Generator {
      */
     public static void main(String[] args) {
         // Define the input CSV file and output folder path
-        String inputFilePath = "Backend/src/step3_Determinisation/graphics/Samples/regex_list.csv";
-        String outputFolderPath = "Backend/src/step3_Determinisation/graphics/Samples";
+        String inputFilePath = "Backend/src/step3_DFA/graphics/Samples/regex_list.csv";
+        String outputFolderPath = "Backend/src/step3_DFA/graphics/Samples";
 
         // Process the regular expressions from the input file and export DFA JSONs
         DFA_JSON_Generator dfaGenerator = new DFA_JSON_Generator();
-        dfaGenerator.processRegexFile(inputFilePath, outputFolderPath);
+        processRegexFile(inputFilePath, outputFolderPath);
     }
 
     public static void processRegexFile(String inputFilePath, String outputFolderPath) {

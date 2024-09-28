@@ -1,4 +1,4 @@
-package src.step3_Determinisation;
+package src.step3_DFA;
 
 import src.step2_NDFA.NDFA_Struct;
 import java.util.*;
@@ -9,6 +9,8 @@ import java.util.*;
  */
 public class DFA_Struct extends NDFA_Struct {
 
+    public Set<Etat> etatAcceptant; // Set of accepting states
+
     /**
      * Constructs a DFA with the specified initial state and accepting states.
      *
@@ -17,6 +19,7 @@ public class DFA_Struct extends NDFA_Struct {
      */
     public DFA_Struct(Etat etatInitial, Set<Etat> etatsAcceptants) {
         super(etatInitial, etatsAcceptants.iterator().next()); // Use the NDFA constructor with one accepting state
+        this.etatAcceptant = etatsAcceptants;  // Set of accepting states
     }
 
     /**
@@ -25,8 +28,13 @@ public class DFA_Struct extends NDFA_Struct {
      */
     public static class Etat extends NDFA_Struct.Etat {
 
-
         private String name;
+
+        // No-argument constructor for Etat
+        public Etat() {
+            super(); // Call the parent constructor to set the ID
+            this.name = "State_" + id;  // Default name based on the state ID
+        }
 
         // Constructor that accepts a name for the state
         public Etat(String name) {
@@ -37,12 +45,6 @@ public class DFA_Struct extends NDFA_Struct {
         @Override
         public String toString() {
             return "State ID: " + id + ", Name: " + name;
-        }
-        /**
-         * Constructs a new DFA state with a unique ID.
-         */
-        public Etat() {
-            super();
         }
 
         /**

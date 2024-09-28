@@ -1,4 +1,4 @@
-package src.step3_Determinisation.graphics;
+package src.step3_DFA.graphics;
 
 import src.step2_NDFA.NDFA_Struct;
 import src.step2_NDFA.graphics.NDFA_JSON_Exporter;
@@ -9,12 +9,12 @@ import java.util.*;
  * The {@code DFA_JSON_Exporter} class inherits from {@code NDFA_JSON_Exporter} and
  * is responsible for exporting a DFA structure to a JSON file for visualization or analysis.
  */
-public class DFA_JSON_Exporter extends NDFA_JSON_Exporter {
+public class DFAMinimized_JSON_Exporter extends NDFA_JSON_Exporter {
 
     /**
      * Overrides the method to export the DFA structure to a JSON file.
      *
-     * @param dfa The DFA structure to export.
+     * @param dfa      The DFA structure to export.
      * @param filename The name of the file to which the JSON format will be written.
      */
     @Override
@@ -49,6 +49,12 @@ public class DFA_JSON_Exporter extends NDFA_JSON_Exporter {
         for (Map.Entry<Integer, Set<NDFA_Struct.Etat>> entry : etat.transitions.entrySet()) {
             int symbol = entry.getKey();
             for (NDFA_Struct.Etat suivant : entry.getValue()) {
+                if (suivant == null) {
+                    // Log or handle the case where the next state is null
+                    System.err.println("Null transition state detected for symbol: " + (char) symbol + " from state: " + etat.id);
+                    continue; // Skip this transition
+                }
+
                 Map<String, String> link = new HashMap<>();
                 link.put("source", String.valueOf(etat.id)); // Ensure source is a String
                 link.put("target", String.valueOf(suivant.id)); // Ensure target is a String

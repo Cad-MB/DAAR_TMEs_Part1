@@ -2,7 +2,7 @@ package test.step3;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import src.step3_Determinisation.DFA_Struct;
+import src.step3_DFA.DFA_Struct;
 import src.step2_NDFA.NDFA_Struct;
 
 import java.util.Set;

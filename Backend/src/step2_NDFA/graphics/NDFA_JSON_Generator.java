@@ -25,7 +25,7 @@ public class NDFA_JSON_Generator {
     /**
      * Resets the state ID counter before generating a new NDFA.
      */
-    protected static void resetStateCounter() {
+    public static void resetStateCounter() {
         NDFA_Struct.Etat.compteur = 0;
     }
 

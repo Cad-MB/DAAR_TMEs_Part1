@@ -1,4 +1,4 @@
-package src.step3_Determinisation;
+package src.step3_DFA;
 
 import src.step2_NDFA.NDFA_Struct;
 import java.util.*;

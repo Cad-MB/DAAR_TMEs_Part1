@@ -2,7 +2,6 @@ package src.step4_minimisation.graphics;
 
 import src.step3_DFA.DFA_Determinisation;
 import src.step3_DFA.DFA_Struct;
-import src.step3_DFA.graphics.DFAMinimized_JSON_Exporter;
 import src.step3_DFA.graphics.DFA_JSON_Generator;
 import src.step4_minimisation.DFA_Minimization;
 

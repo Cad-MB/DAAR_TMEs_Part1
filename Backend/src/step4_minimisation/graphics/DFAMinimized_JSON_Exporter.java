@@ -1,4 +1,4 @@
-package src.step3_DFA.graphics;
+package src.step4_minimisation.graphics;
 
 import src.step2_NDFA.NDFA_Struct;
 import src.step2_NDFA.graphics.NDFA_JSON_Exporter;

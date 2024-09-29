@@ -126,4 +126,15 @@ public class DFA_DeterminisationTest {
         // Ensure initial state is also the accepting state (as per Kleene star behavior)
         assertEquals(dfa.etatInitial, dfa.etatAcceptant);
     }
+
+    @Test
+    public void testMultipleEndings () throws Exception {
+        String regex = "a*b|cd*";
+        RegExTree_Struct tree = RegExTree_from_RegEx_Parser.parse(regex);
+        NDFA_Struct ndfa = NDFA_from_RegExTree_Parser.parseTreeToNDFA(tree);
+        DFA_Struct dfa = DFA_Determinisation.determinise(ndfa);
+
+        System.out.println(dfa.etatAcceptant);
+    }
+
 }

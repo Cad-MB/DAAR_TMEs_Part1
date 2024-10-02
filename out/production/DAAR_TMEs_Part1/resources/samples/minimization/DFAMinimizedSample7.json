@@ -1,0 +1,12 @@
+{
+  "nodes": [
+    { "id": "13", "type": "initial" },
+    { "id": "14" },
+    { "id": "12", "type": "accepting" }
+  ],
+  "links": [
+    { "source": "13", "target": "14", "label": "a" },
+    { "source": "14", "target": "12", "label": "c" },
+    { "source": "13", "target": "14", "label": "b" }
+  ]
+}

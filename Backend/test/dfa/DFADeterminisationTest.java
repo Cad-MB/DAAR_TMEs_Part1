@@ -136,4 +136,15 @@ public class DFADeterminisationTest {
         System.out.println(dfaMin.etatInitial);
     }
 
+    @Test
+    public void testInitialState () throws Exception {
+        String regex = "a*b|cd*|rd*rf";
+        RegExTree tree = RegExTreeParser.parse(regex);
+        NDFA ndfa = NDFAParser.parseTreeToNDFA(tree);
+        DFA dfa = DFADeterminisation.determinise(ndfa);
+        DFA dfaMin = DFAMinimization.minimize(dfa);
+
+        System.out.println(dfaMin.etatInitial.transitions);
+    }
+
 }

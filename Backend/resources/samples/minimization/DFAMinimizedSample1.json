@@ -1,0 +1,22 @@
+{
+  "nodes": [
+    { "id": "37", "type": "initial" },
+    { "id": "38" },
+    { "id": "35" },
+    { "id": "40" },
+    { "id": "39" },
+    { "id": "36", "type": "accepting" }
+  ],
+  "links": [
+    { "source": "37", "target": "38", "label": "a" },
+    { "source": "38", "target": "38", "label": "a" },
+    { "source": "38", "target": "35", "label": "b" },
+    { "source": "37", "target": "35", "label": "b" },
+    { "source": "37", "target": "40", "label": "r" },
+    { "source": "40", "target": "39", "label": "r" },
+    { "source": "39", "target": "35", "label": "f" },
+    { "source": "40", "target": "40", "label": "d" },
+    { "source": "37", "target": "36", "label": "c" },
+    { "source": "36", "target": "36", "label": "d" }
+  ]
+}

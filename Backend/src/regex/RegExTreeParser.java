@@ -69,7 +69,6 @@ public class RegExTreeParser {
    * @return A {@code RegExTree} representing the syntax tree of the parsed regex.
    */
   public static RegExTree parse(String regEx) {
-    regEx=regEx.toLowerCase();
     ArrayList<RegExTree> result = new ArrayList<>();
     for (int i = 0; i < regEx.length(); i++)
       result.add(new RegExTree(charToRoot(regEx.charAt(i)), new ArrayList<>()));

@@ -49,10 +49,7 @@ public class DFASearch {
      */
     public static boolean isAcceptedByDFA(DFA dfa, String input) {
         DFA.Etat currentState = (DFA.Etat) dfa.etatInitial;
-
         for (char c : input.toCharArray()) {
-            // Convert both the input character and the DFA transitions to lowercase
-            c = Character.toLowerCase(c); // Convert input character to lowercase
 
             // Try to find a transition using the lowercase character
             Set<NDFA.Etat> transitions = currentState.obtenirTransition(c);
@@ -77,7 +74,6 @@ public class DFASearch {
 
         for (String line : lines) {
             String originalLine = line;  // Keep the original line for highlighting
-            String lowerCaseLine = line.toLowerCase();  // Convert the line to lowercase for case-insensitive matching
 
             // Iterate through the entire line looking for matches
             int index = 0;
@@ -85,9 +81,9 @@ public class DFASearch {
                 boolean matchFound = false;
                 // Attempt to find the longest match from the current position
                 for (int end = index + 1; end <= line.length(); end++) {
-                    String lowerCaseSubstring = lowerCaseLine.substring(index, end);  // Case-insensitive substring
+                    String Substring = line.substring(index, end);  // Case-insensitive substring
 
-                    if (isAcceptedByDFA(dfa, lowerCaseSubstring)) {
+                    if (isAcceptedByDFA(dfa, Substring)) {
                         // Highlight the original case substring in the line
                         String highlightedLine = originalLine.substring(0, index)
                                 + GREEN + originalLine.substring(index, end) + RESET
@@ -125,7 +121,7 @@ public class DFASearch {
             DFA minimizedDFA = DFAMinimization.minimize(dfa);
 
             // Read the file content into a String
-            String filename = "Backend/resources/texts/41011-0.txt";
+            String filename = "Backend/resources/texts/56667-0.txt";
             String text = readFile(filename);
 
             // Search for the pattern in the text and highlight lines containing it

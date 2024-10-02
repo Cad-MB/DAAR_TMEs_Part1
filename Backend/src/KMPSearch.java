@@ -73,7 +73,7 @@ public class KMPSearch {
         String[] lines = text.split("\n");  // Split text by lines
 
         for (String line : lines) {
-            int index = line.toLowerCase().indexOf(pattern.toLowerCase()); // Case-insensitive search
+            int index = line.indexOf(pattern); // Case-insensitive search
             if (index != -1) {
                 // Highlight the word
                 String highlightedLine = line.substring(0, index)

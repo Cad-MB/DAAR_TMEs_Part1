@@ -11,15 +11,15 @@ import src.ndfa.NDFAParser;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Locale;
 import java.util.Scanner;
 import java.util.Set;
 
 public class DFASearch {
 
-    // ANSI escape code for green text
+    // ANSI escape code for red text
+    public static final String RED = "\u001B[31m";
     public static final String GREEN = "\u001B[32m";
+    public static final String BOLD = "\033[1m";   // Bold text
     public static final String RESET = "\u001B[0m";
 
     /**
@@ -72,6 +72,8 @@ public class DFASearch {
     public static void highlightPatternInText(String text, DFA dfa) {
         String[] lines = text.split("\n");  // Split the text into lines
 
+        int matchedLinesCount = 0;
+
         for (String line : lines) {
             String originalLine = line;  // Keep the original line for highlighting
 
@@ -86,12 +88,13 @@ public class DFASearch {
                     if (isAcceptedByDFA(dfa, Substring)) {
                         // Highlight the original case substring in the line
                         String highlightedLine = originalLine.substring(0, index)
-                                + GREEN + originalLine.substring(index, end) + RESET
+                                + RED + BOLD + originalLine.substring(index, end) + RESET
                                 + originalLine.substring(end);
                         System.out.println(highlightedLine);
                         // Move index to the end of the found match
                         index = end;
                         matchFound = true;
+                        matchedLinesCount ++ ;
                         break;  // Break to avoid multiple highlights in the same line
                     }
                 }
@@ -102,6 +105,7 @@ public class DFASearch {
                 }
             }
         }
+        System.out.println("There are " + GREEN + BOLD + matchedLinesCount + RESET + " Matched lines");
     }
 
     public static void main(String[] args) {
@@ -112,6 +116,10 @@ public class DFASearch {
             String regex = scanner.nextLine(); // Assume the regex will be converted to a DFA
 
             RegExTree tree = RegExTreeParser.parse(regex);
+            if (tree == null) {
+                System.err.println("Error, Parsed Regex Tree is null");
+                return;
+            }
             NDFA ndfa = NDFAParser.parseTreeToNDFA(tree);
             DFA dfa = DFADeterminisation.determinise(ndfa);
             dfa = DFAMinimization.minimize(dfa);

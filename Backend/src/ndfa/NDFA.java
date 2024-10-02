@@ -13,9 +13,6 @@ import java.util.*;
  */
 public class NDFA {
 
-    /** Number of ASCII symbols that can be processed in the automaton. */
-    private final static int SYMBOLES_ASCII = 256;
-
     /** The initial state of the NDFA. */
     public final Etat etatInitial;
 

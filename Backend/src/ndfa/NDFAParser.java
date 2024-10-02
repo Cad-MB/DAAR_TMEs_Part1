@@ -89,6 +89,20 @@ public class NDFAParser {
             return new NDFA(etatDebut, etatFin);        // Return the NDFA
         }
 
+        // Handle "+" (e.g., "a+" means repeat "a" one or more times)
+        if (arbreRegEx.getRoot() == RegExTreeParser.PLUS) {
+            NDFA.Etat etatDebut = new NDFA.Etat();               // New start state
+            NDFA gauche = parseTreeToNDFA(arbreRegEx.subTrees.getFirst()); // Left subtree
+            NDFA.Etat etatFin = new NDFA.Etat();                 // New accepting state
+
+            etatDebut.ajouterTransition(gauche.etatInitial);   // Epsilon transition to start
+            gauche.etatAcceptant.ajouterTransition(gauche.etatInitial); // Loop back (repetition)
+            gauche.etatAcceptant.ajouterTransition(etatFin);   // Epsilon transition to accept state
+
+            return new NDFA(gauche.etatInitial, etatFin);      // Return the NDFA, ensuring at least one pass
+        }
+
+
         // Fallback case: If the expression is unknown or unsupported, return a default NDFA
         return new NDFA(new NDFA.Etat(), new NDFA.Etat());
     }

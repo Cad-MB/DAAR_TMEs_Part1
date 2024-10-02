@@ -149,6 +149,8 @@ public class RegExTree {
             return ".";
         if (root == RegExTreeParser.ETOILE)
             return "*";
+        if (root == RegExTreeParser.PLUS)
+            return "+";
         if (root == RegExTreeParser.ALTERN)
             return "|";
         if (root == RegExTreeParser.DOT)

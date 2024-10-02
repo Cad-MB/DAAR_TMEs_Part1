@@ -27,6 +27,11 @@ public class RegExTreeParser {
   public static final int ETOILE = 0xE7011E;
 
   /**
+   * Macro representing the PLUS (at least one) in the regular expression syntax tree
+   */
+  public static final int PLUS = 0x2B;
+
+  /**
    * Macro representing alternation (OR operator) in the regular expression syntax tree.
    */
   public static final int ALTERN = 0xA17E54;
@@ -110,6 +115,8 @@ public class RegExTreeParser {
       return DOT;
     if (c == '*')
       return ETOILE;
+    if (c == '+')
+      return PLUS;
     if (c == '|')
       return ALTERN;
     if (c == '(')
@@ -132,6 +139,8 @@ public class RegExTreeParser {
       result = processParenthese(result);
     while (containEtoile(result))
       result = processEtoile(result);
+    while (containPlus(result))
+      result = processPlus(result);
     while (containConcat(result))
       result = processConcat(result);
     while (containAltern(result))
@@ -224,6 +233,46 @@ public class RegExTreeParser {
         ArrayList<RegExTree> subTrees = new ArrayList<>();
         subTrees.add(last);
         result.add(new RegExTree(ETOILE, subTrees));
+      } else {
+        result.add(t);
+      }
+    }
+    return result;
+  }
+
+  /**
+   * Checks if the list of regex trees contains a Kleene star operation.
+   *
+   * @param trees The list of regex trees to check.
+   * @return {@code true} if a Kleene star is found, otherwise {@code false}.
+   */
+  private static boolean containPlus(ArrayList<RegExTree> trees) {
+    for (RegExTree t : trees)
+      if (t.root == PLUS && t.subTrees.isEmpty())
+        return true;
+    return false;
+  }
+
+  /**
+   * Processes the regex trees to handle the PLUS operation and updates the tree structure.
+   *
+   * @param trees The list of regex trees to process.
+   * @return A new list of trees with the Kleene star operation processed.
+   * @throws Exception If there is a syntax error.
+   */
+  private static ArrayList<RegExTree> processPlus(ArrayList<RegExTree> trees) throws Exception {
+    ArrayList<RegExTree> result = new ArrayList<>();
+    boolean found = false;
+    for (RegExTree t : trees) {
+      if (!found && t.root == PLUS && t.subTrees.isEmpty()) {
+        if (result.isEmpty()) {
+          throw new Exception("Invalid regex: '+' cannot be applied without a valid operand.");
+        }
+        found = true;
+        RegExTree last = result.removeLast();
+        ArrayList<RegExTree> subTrees = new ArrayList<>();
+        subTrees.add(last);
+        result.add(new RegExTree(PLUS, subTrees));
       } else {
         result.add(t);
       }

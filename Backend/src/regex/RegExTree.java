@@ -3,14 +3,20 @@ package src.regex;
 import java.util.ArrayList;
 
 /**
- * This class represents a node in a tree structure specifically designed to parse
- * and represent regular expressions. Each node can either be a leaf node (representing
- * a single character or symbol in the regex) or an internal node (with subtrees that represent
+ * This class represents a node in a tree structure specifically designed to
+ * parse
+ * and represent regular expressions. Each node can either be a leaf node
+ * (representing
+ * a single character or symbol in the regex) or an internal node (with subtrees
+ * that represent
  * operators like concatenation, alternation, etc.).
  *
- * <p>The class includes methods for manipulating and retrieving information about
- * the tree's structure, such as root nodes, subtrees, and string representation of
- * the regular expression.</p>
+ * <p>
+ * The class includes methods for manipulating and retrieving information about
+ * the tree's structure, such as root nodes, subtrees, and string representation
+ * of
+ * the regular expression.
+ * </p>
  */
 public class RegExTree {
 
@@ -21,7 +27,8 @@ public class RegExTree {
     protected int root;
 
     /**
-     * A list of child nodes (subtrees) of this node. This allows for the representation
+     * A list of child nodes (subtrees) of this node. This allows for the
+     * representation
      * of more complex regular expressions.
      */
     public ArrayList<RegExTree> subTrees;
@@ -29,8 +36,9 @@ public class RegExTree {
     /**
      * Constructs a new RegExTree node with a root value and a list of subtrees.
      *
-     * @param root The integer value representing the root of the tree (usually a character
-     *             or an operator).
+     * @param root     The integer value representing the root of the tree (usually
+     *                 a character
+     *                 or an operator).
      * @param subTrees The list of subtrees or child nodes.
      */
     public RegExTree(int root, ArrayList<RegExTree> subTrees) {
@@ -41,7 +49,8 @@ public class RegExTree {
     /**
      * Constructs a new leaf node (a node without any subtrees).
      *
-     * @param root The integer value representing the root of the tree (usually a character
+     * @param root The integer value representing the root of the tree (usually a
+     *             character
      *             or an operator).
      */
     public RegExTree(int root) {
@@ -52,8 +61,10 @@ public class RegExTree {
     /**
      * Returns a string representation of the tree in a parenthesized format.
      *
-     * <p>For example, if the tree represents the expression 'a|b', the output
-     * might be 'a,(b)' where '|' is the root operator.</p>
+     * <p>
+     * For example, if the tree represents the expression 'a|b', the output
+     * might be 'a,(b)' where '|' is the root operator.
+     * </p>
      *
      * @return A string representation of the regular expression tree.
      */
@@ -61,7 +72,7 @@ public class RegExTree {
     public String toString() {
         if (subTrees.isEmpty())
             return rootToString();
-        StringBuilder result = new StringBuilder(rootToString() + "(" + subTrees.getFirst().toString());
+        StringBuilder result = new StringBuilder(rootToString() + "(" + subTrees.get(0).toString());
         for (int i = 1; i < subTrees.size(); i++)
             result.append(",").append(subTrees.get(i).toString());
         return result + ")";
@@ -75,7 +86,7 @@ public class RegExTree {
     public RegExTree getLeaf() {
         if (subTrees.isEmpty())
             return this;
-        return subTrees.getFirst().getLeaf();
+        return subTrees.get(0).getLeaf();
     }
 
     /**
@@ -133,14 +144,17 @@ public class RegExTree {
     public RegExTree getLeftTree() {
         if (subTrees.isEmpty())
             return null;
-        return subTrees.getFirst();
+        return subTrees.get(0);
     }
 
     /**
      * Converts the root integer value to its corresponding string representation.
      *
-     * <p>For example, it maps the root values representing the regex operators '*' and '|'
-     * to their string equivalents, and characters to their string form.</p>
+     * <p>
+     * For example, it maps the root values representing the regex operators '*' and
+     * '|'
+     * to their string equivalents, and characters to their string form.
+     * </p>
      *
      * @return The string representation of the root node.
      */
@@ -171,7 +185,8 @@ public class RegExTree {
      * Determines if this node's root matches a specific character.
      *
      * @param r The character to compare with the root value.
-     * @return {@code true} if the root matches the given character, {@code false} otherwise.
+     * @return {@code true} if the root matches the given character, {@code false}
+     *         otherwise.
      */
     public boolean isRoot(char r) {
         return root == (int) r;

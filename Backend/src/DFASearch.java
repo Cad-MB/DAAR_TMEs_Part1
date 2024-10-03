@@ -11,6 +11,7 @@ import src.ndfa.NDFAParser;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -73,40 +74,55 @@ public class DFASearch {
         String[] lines = text.split("\n");  // Split the text into lines
 
         int matchedLinesCount = 0;
+        Set<String> printedLines = new HashSet<>(); // To track printed lines
 
         for (String line : lines) {
-            String originalLine = line;  // Keep the original line for highlighting
+            StringBuilder highlightedLineBuilder = new StringBuilder(); // Use StringBuilder for the new line
+            int index = 0; // Current index in the original line
+            boolean lineModified = false; // Flag to check if line has been modified
 
             // Iterate through the entire line looking for matches
-            int index = 0;
             while (index < line.length()) {
                 boolean matchFound = false;
+
                 // Attempt to find the longest match from the current position
                 for (int end = index + 1; end <= line.length(); end++) {
-                    String Substring = line.substring(index, end);  // Case-insensitive substring
+                    String substring = line.substring(index, end);  // Current substring
 
-                    if (isAcceptedByDFA(dfa, Substring)) {
+                    if (isAcceptedByDFA(dfa, substring)) {
                         // Highlight the original case substring in the line
-                        String highlightedLine = originalLine.substring(0, index)
-                                + RED + BOLD + originalLine.substring(index, end) + RESET
-                                + originalLine.substring(end);
-                        System.out.println(highlightedLine);
+                        String highlightedSubstring = RED + BOLD + substring + RESET;
+
+                        // Append the portion of the line before the match
+                        highlightedLineBuilder.append(line, index, index);
+                        // Append the highlighted match
+                        highlightedLineBuilder.append(highlightedSubstring);
+
                         // Move index to the end of the found match
                         index = end;
                         matchFound = true;
-                        matchedLinesCount ++ ;
+                        lineModified = true; // Mark that this line has been modified
                         break;  // Break to avoid multiple highlights in the same line
                     }
                 }
 
                 if (!matchFound) {
-                    // If no match is found, move to the next character
-                    index++;
+                    // If no match is found, append the current character
+                    highlightedLineBuilder.append(line.charAt(index));
+                    index++; // Move to the next character
                 }
+            }
+
+            // If the line was modified and not already printed, print it
+            if (lineModified && !printedLines.contains(highlightedLineBuilder.toString())) {
+                System.out.println(highlightedLineBuilder.toString());
+                printedLines.add(highlightedLineBuilder.toString());
+                matchedLinesCount++;
             }
         }
         System.out.println("There are " + GREEN + BOLD + matchedLinesCount + RESET + " Matched lines");
     }
+
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -129,7 +145,7 @@ public class DFASearch {
             DFA minimizedDFA = DFAMinimization.minimize(dfa);
 
             // Read the file content into a String
-            String filename = "Backend/resources/texts/56667-0.txt";
+            String filename = "Backend/resources/texts/41011-0.txt";
             String text = readFile(filename);
 
             // Search for the pattern in the text and highlight lines containing it

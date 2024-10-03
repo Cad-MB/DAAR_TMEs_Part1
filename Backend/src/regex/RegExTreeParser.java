@@ -4,14 +4,18 @@ import java.util.ArrayList;
 import java.lang.Exception;
 
 /**
- * The {@code RegExTreeParser} class is responsible for parsing regular expressions
+ * The {@code RegExTreeParser} class is responsible for parsing regular
+ * expressions
  * and constructing a syntax tree representation of the regular expression.
- * It includes methods to handle regex syntax, such as concatenation, alternation,
+ * It includes methods to handle regex syntax, such as concatenation,
+ * alternation,
  * and the Kleene star operation.
  *
- * <p>This class provides functionality to parse a regex string and convert it
+ * <p>
+ * This class provides functionality to parse a regex string and convert it
  * into a tree structure represented by {@code RegExTree} objects. It also
- * includes macros for commonly used regex operators.</p>
+ * includes macros for commonly used regex operators.
+ * </p>
  */
 public class RegExTreeParser {
 
@@ -22,17 +26,20 @@ public class RegExTreeParser {
   public static final int CONCAT = 0xC04CA7;
 
   /**
-   * Macro representing the Kleene star (repetition) in the regular expression syntax tree.
+   * Macro representing the Kleene star (repetition) in the regular expression
+   * syntax tree.
    */
   public static final int ETOILE = 0xE7011E;
 
   /**
-   * Macro representing the PLUS (at least one) in the regular expression syntax tree
+   * Macro representing the PLUS (at least one) in the regular expression syntax
+   * tree
    */
   public static final int PLUS = 0x2B;
 
   /**
-   * Macro representing alternation (OR operator) in the regular expression syntax tree.
+   * Macro representing alternation (OR operator) in the regular expression syntax
+   * tree.
    */
   public static final int ALTERN = 0xA17E54;
 
@@ -52,7 +59,8 @@ public class RegExTreeParser {
   public static final int PARENTHESEFERMANT = 0x51515151;
 
   /**
-   * Macro representing the '.' (dot) character, which can be used to match any character.
+   * Macro representing the '.' (dot) character, which can be used to match any
+   * character.
    */
   public static final int DOT = 0xD07;
 
@@ -87,7 +95,8 @@ public class RegExTreeParser {
 
   /**
    * Parses the {@code regEx} string and converts it into a syntax tree.
-   * This method processes the expression using different regex operators like parentheses,
+   * This method processes the expression using different regex operators like
+   * parentheses,
    * Kleene star, concatenation, and alternation.
    *
    * @return A {@code RegExTree} representing the syntax tree of the parsed regex.
@@ -95,9 +104,9 @@ public class RegExTreeParser {
    */
   private static RegExTree parse() throws Exception {
     // Debug: can be used for debugging
-      RegExTree example = exampleAhoUllman();
+    RegExTree example = exampleAhoUllman();
 
-      ArrayList<RegExTree> result = new ArrayList<>();
+    ArrayList<RegExTree> result = new ArrayList<>();
     for (int i = 0; i < regEx.length(); i++)
       result.add(new RegExTree(charToRoot(regEx.charAt(i)), new ArrayList<>()));
 
@@ -105,10 +114,12 @@ public class RegExTreeParser {
   }
 
   /**
-   * Converts a character to its corresponding regex operation or keeps it as a literal.
+   * Converts a character to its corresponding regex operation or keeps it as a
+   * literal.
    *
    * @param c The character to convert.
-   * @return The integer representing the corresponding regex operation or the character's ASCII value.
+   * @return The integer representing the corresponding regex operation or the
+   *         character's ASCII value.
    */
   private static int charToRoot(char c) {
     if (c == '.')
@@ -149,7 +160,7 @@ public class RegExTreeParser {
     if (result.size() > 1)
       throw new Exception();
 
-    return removeProtection(result.getFirst());
+    return removeProtection(result.get(0));
   }
 
   /**
@@ -166,7 +177,8 @@ public class RegExTreeParser {
   }
 
   /**
-   * Processes the regex trees to handle parentheses and create subtrees for protected expressions.
+   * Processes the regex trees to handle parentheses and create subtrees for
+   * protected expressions.
    *
    * @param trees The list of regex trees to process.
    * @return A new list of trees with parentheses processed.
@@ -214,7 +226,8 @@ public class RegExTreeParser {
   }
 
   /**
-   * Processes the regex trees to handle the Kleene star operation and updates the tree structure.
+   * Processes the regex trees to handle the Kleene star operation and updates the
+   * tree structure.
    *
    * @param trees The list of regex trees to process.
    * @return A new list of trees with the Kleene star operation processed.
@@ -254,7 +267,8 @@ public class RegExTreeParser {
   }
 
   /**
-   * Processes the regex trees to handle the PLUS operation and updates the tree structure.
+   * Processes the regex trees to handle the PLUS operation and updates the tree
+   * structure.
    *
    * @param trees The list of regex trees to process.
    * @return A new list of trees with the Kleene star operation processed.
@@ -303,7 +317,8 @@ public class RegExTreeParser {
   }
 
   /**
-   * Processes the regex trees to handle concatenation and updates the tree structure.
+   * Processes the regex trees to handle concatenation and updates the tree
+   * structure.
    *
    * @param trees The list of regex trees to process.
    * @return A new list of trees with the concatenation operation processed.
@@ -352,7 +367,8 @@ public class RegExTreeParser {
   }
 
   /**
-   * Processes the regex trees to handle alternation (OR) and updates the tree structure.
+   * Processes the regex trees to handle alternation (OR) and updates the tree
+   * structure.
    *
    * @param trees The list of regex trees to process.
    * @return A new list of trees with the alternation operation processed.
@@ -387,7 +403,8 @@ public class RegExTreeParser {
   }
 
   /**
-   * Removes protection nodes from the syntax tree. Protection nodes are used internally
+   * Removes protection nodes from the syntax tree. Protection nodes are used
+   * internally
    * to handle parentheses and should not appear in the final syntax tree.
    *
    * @param tree The syntax tree to process.
@@ -400,7 +417,7 @@ public class RegExTreeParser {
     if (tree.subTrees.isEmpty())
       return tree;
     if (tree.root == PROTECTION)
-      return removeProtection(tree.subTrees.getFirst());
+      return removeProtection(tree.subTrees.get(0));
 
     ArrayList<RegExTree> subTrees = new ArrayList<>();
     for (RegExTree t : tree.subTrees)
@@ -409,7 +426,8 @@ public class RegExTreeParser {
   }
 
   /**
-   * Example from Aho-Ullman book (Chap.10 Example 10.25) that builds a sample regex tree
+   * Example from Aho-Ullman book (Chap.10 Example 10.25) that builds a sample
+   * regex tree
    * for the expression 'a|bc*'.
    *
    * @return A {@code RegExTree} representing the example syntax tree.
@@ -431,7 +449,7 @@ public class RegExTreeParser {
     return new RegExTree(ALTERN, subTrees);
   }
 
-    public static void setRegEx(String regEx) {
-        RegExTreeParser.regEx = regEx;
-    }
+  public static void setRegEx(String regEx) {
+    RegExTreeParser.regEx = regEx;
+  }
 }

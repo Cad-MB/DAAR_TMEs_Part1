@@ -1,5 +1,7 @@
 package src.minimization.export;
 
+import src.dfa.DFA;
+import src.dfa.export.DFAExporter;
 import src.ndfa.NDFA;
 import src.ndfa.export.NDFAExporter;
 
@@ -9,7 +11,7 @@ import java.util.*;
  * The {@code DFAExporter} class inherits from {@code NDFAExporter} and
  * is responsible for exporting a DFA structure to a JSON file for visualization or analysis.
  */
-public class DFAMinimizationExporter extends NDFAExporter {
+public class DFAMinimizationExporter extends DFAExporter {
 
     /**
      * Overrides the method to export the DFA structure to a JSON file.
@@ -18,7 +20,7 @@ public class DFAMinimizationExporter extends NDFAExporter {
      * @param filename The name of the file to which the JSON format will be written.
      */
     @Override
-    public void toJsonFile(NDFA dfa, String filename) {
+    public void toJsonFile(DFA dfa, String filename) {
         // Call the method from NDFAExporter with appropriate DFA handling
         super.toJsonFile(dfa, filename);
     }

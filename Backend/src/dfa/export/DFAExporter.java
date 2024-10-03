@@ -1,8 +1,11 @@
 package src.dfa.export;
 
+import src.dfa.DFA;
 import src.ndfa.NDFA;
 import src.ndfa.export.NDFAExporter;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -17,10 +20,58 @@ public class DFAExporter extends NDFAExporter {
      * @param dfa The DFA structure to export.
      * @param filename The name of the file to which the JSON format will be written.
      */
-    @Override
-    public void toJsonFile(NDFA dfa, String filename) {
+    public void toJsonFile(DFA dfa, String filename) {
         // Call the method from NDFAExporter with appropriate DFA handling
-        super.toJsonFile(dfa, filename);
+        try (FileWriter writer = new FileWriter(filename)) {
+            // Create lists for nodes and links
+            List<Map<String, String>> nodes = new ArrayList<>();
+            List<Map<String, String>> links = new ArrayList<>();
+
+            // Add all states and transitions to the lists
+            Set<NDFA.Etat> visites = new HashSet<>();
+            collectEtatForJson(dfa.etatInitial, nodes, links, visites, dfa);
+            // Start writing the JSON structure
+            writer.write("{\n");
+
+            // Write nodes
+            writer.write("  \"nodes\": [\n");
+            for (int i = 0; i < nodes.size(); i++) {
+                Map<String, String> node = nodes.get(i);
+                StringBuilder nodeJson = new StringBuilder();
+                nodeJson.append("    { \"id\": \"").append(node.get("id")).append("\"");
+
+                // Check if the node is the initial or accepting state
+                if (node.get("id").equals(String.valueOf(dfa.etatInitial.id))) {
+                    nodeJson.append(", \"type\": \"initial\"");
+                }
+                if (dfa.etatAcceptant.stream().anyMatch(e -> node.get("id").equals(String.valueOf(e.id)))) {
+                    nodeJson.append(", \"type\": \"accepting\"");
+                }
+
+                nodeJson.append(" }");
+                writer.write(nodeJson.toString());
+                if (i < nodes.size() - 1)
+                    writer.write(",");
+                writer.write("\n");
+            }
+            writer.write("  ],\n");
+
+            // Write links
+            writer.write("  \"links\": [\n");
+            for (int i = 0; i < links.size(); i++) {
+                Map<String, String> link = links.get(i);
+                writer.write("    { \"source\": \"" + link.get("source") + "\", \"target\": \"" + link.get("target")
+                        + "\", \"label\": \"" + link.get("label") + "\" }");
+                if (i < links.size() - 1)
+                    writer.write(",");
+                writer.write("\n");
+            }
+            writer.write("  ]\n");
+
+            writer.write("}\n");
+        } catch (IOException e) {
+            System.err.println("Erreur lors de l'écriture du fichier JSON: " + e.getMessage());
+        }
     }
 
     /**

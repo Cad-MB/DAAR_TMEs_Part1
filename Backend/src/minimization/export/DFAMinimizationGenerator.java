@@ -34,7 +34,6 @@ public class DFAMinimizationGenerator extends DFAGenerator {
         resetStateCounter();
 
         // Call the superclass method to build the NDFA from the regular expression
-        System.out.println("Processing regex (NDFA): " + regEx);
         buildNDFAFromRegex(regEx);  // This builds the NDFA and stores it in the superclass
 
         // Determinize the NDFA into a DFA
@@ -82,6 +81,7 @@ public class DFAMinimizationGenerator extends DFAGenerator {
             String line;
             int regexIndex = 1;
 
+            System.out.println("Building Ndfa from the regex");
             // Read the file line by line and store each regex
             while ((line = br.readLine()) != null) {
                 if (line.trim().isEmpty()) {
@@ -89,7 +89,6 @@ public class DFAMinimizationGenerator extends DFAGenerator {
                 }
                 // Add regex to the list for later DFA processing
                 regexList.add(line.trim());
-
                 // Build NDFA from the current regex line
                 buildNDFAFromRegex(line.trim());
 
@@ -97,9 +96,9 @@ public class DFAMinimizationGenerator extends DFAGenerator {
             }
 
             // Now process the DFA for each regex
+            System.out.println("Building minimized DFA from the Regex.");
             for (int i = 0; i < regexList.size(); i++) {
                 String regEx = regexList.get(i);
-                System.out.println("Converting NDFA to DFA for regex: " + regEx);
 
                 // Build and minimize DFA from NDFA
                 DFA dfa = buildMinimizedDFAFromRegex(regEx);

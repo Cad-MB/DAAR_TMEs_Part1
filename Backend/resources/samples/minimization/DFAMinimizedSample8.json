@@ -1,16 +1,16 @@
 {
   "nodes": [
-    { "id": "22", "type": "initial" },
-    { "id": "21" },
-    { "id": "19" },
+    { "id": "21", "type": "initial" },
+    { "id": "22" },
+    { "id": "19", "type": "accepting" },
     { "id": "20", "type": "accepting" }
   ],
   "links": [
-    { "source": "22", "target": "21", "label": "a" },
-    { "source": "21", "target": "21", "label": "a" },
-    { "source": "21", "target": "19", "label": "b" },
+    { "source": "21", "target": "22", "label": "a" },
+    { "source": "22", "target": "22", "label": "a" },
     { "source": "22", "target": "19", "label": "b" },
-    { "source": "22", "target": "20", "label": "c" },
+    { "source": "21", "target": "19", "label": "b" },
+    { "source": "21", "target": "20", "label": "c" },
     { "source": "20", "target": "20", "label": "d" }
   ]
 }

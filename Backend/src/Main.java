@@ -55,7 +55,7 @@ public class Main {
             dfa = DFAMinimization.minimize(dfa);
 
             // Search for the pattern in the text and highlight lines containing it
-            DFASearch.highlightPatternInText(text, dfa);
+            int foundWords = DFASearch.highlightPatternInText(text, dfa, true);
 
         } catch (Exception e) {
             System.err.println("Error in the automate method: " + e.getMessage());

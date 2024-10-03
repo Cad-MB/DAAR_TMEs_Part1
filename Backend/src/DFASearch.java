@@ -70,10 +70,11 @@ public class DFASearch {
      * @param text The full text in which to search for the pattern.
      * @param dfa  The DFA representing the minimized regex.
      */
-    public static void highlightPatternInText(String text, DFA dfa) {
+    public static int highlightPatternInText(String text, DFA dfa, Boolean printLine) {
         String[] lines = text.split("\n");  // Split the text into lines
 
         int matchedLinesCount = 0;
+        int foundWords = 0;
         Set<String> printedLines = new HashSet<>(); // To track printed lines
 
         for (String line : lines) {
@@ -90,6 +91,7 @@ public class DFASearch {
                     String substring = line.substring(index, end);  // Current substring
 
                     if (isAcceptedByDFA(dfa, substring)) {
+                        foundWords++;
                         // Highlight the original case substring in the line
                         String highlightedSubstring = RED + BOLD + substring + RESET;
 
@@ -113,14 +115,20 @@ public class DFASearch {
                 }
             }
 
+            if (printLine) {
+                System.out.println(highlightedLineBuilder.toString());
+            }
             // If the line was modified and not already printed, print it
             if (lineModified && !printedLines.contains(highlightedLineBuilder.toString())) {
-                System.out.println(highlightedLineBuilder.toString());
                 printedLines.add(highlightedLineBuilder.toString());
                 matchedLinesCount++;
             }
         }
-        System.out.println("There are " + GREEN + BOLD + matchedLinesCount + RESET + " Matched lines");
+        if (printLine) {
+            System.out.println("There are " + GREEN + BOLD + matchedLinesCount + RESET + " Matched lines");
+        }
+
+        return foundWords;
     }
 
 
@@ -149,7 +157,7 @@ public class DFASearch {
             String text = readFile(filename);
 
             // Search for the pattern in the text and highlight lines containing it
-            highlightPatternInText(text, minimizedDFA);
+            highlightPatternInText(text, minimizedDFA, true);
 
         } catch (IOException e) {
             System.err.println("Error reading the file: " + e.getMessage());

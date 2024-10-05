@@ -1,4 +1,3 @@
-a*b|cd*|rd*rf
 a|b
 ab
 a*
@@ -7,3 +6,5 @@ a|bc*
 (a|b)c
 a*b|cd*
 (a|(b|c)*d)
+a*b|cd*|rd*rf
+S(a|g|r)+on

@@ -1,21 +1,28 @@
 {
   "nodes": [
-    { "id": "14", "type": "initial" },
-    { "id": "15", "type": "accepting" },
-    { "id": "16" },
-    { "id": "17" },
-    { "id": "18", "type": "accepting" }
+    { "id": "26", "type": "initial" },
+    { "id": "27" },
+    { "id": "28", "type": "accepting" },
+    { "id": "30" },
+    { "id": "33" },
+    { "id": "34", "type": "accepting" },
+    { "id": "32" },
+    { "id": "29", "type": "accepting" },
+    { "id": "31", "type": "accepting" }
   ],
   "links": [
-    { "source": "14", "target": "15", "label": "a" },
-    { "source": "14", "target": "16", "label": "b" },
-    { "source": "16", "target": "16", "label": "b" },
-    { "source": "16", "target": "17", "label": "c" },
-    { "source": "17", "target": "16", "label": "b" },
-    { "source": "17", "target": "17", "label": "c" },
-    { "source": "17", "target": "18", "label": "d" },
-    { "source": "16", "target": "18", "label": "d" },
-    { "source": "14", "target": "17", "label": "c" },
-    { "source": "14", "target": "18", "label": "d" }
+    { "source": "26", "target": "27", "label": "a" },
+    { "source": "27", "target": "27", "label": "a" },
+    { "source": "27", "target": "28", "label": "b" },
+    { "source": "26", "target": "28", "label": "b" },
+    { "source": "26", "target": "30", "label": "r" },
+    { "source": "30", "target": "33", "label": "r" },
+    { "source": "33", "target": "34", "label": "f" },
+    { "source": "30", "target": "32", "label": "d" },
+    { "source": "32", "target": "33", "label": "r" },
+    { "source": "32", "target": "32", "label": "d" },
+    { "source": "26", "target": "29", "label": "c" },
+    { "source": "29", "target": "31", "label": "d" },
+    { "source": "31", "target": "31", "label": "d" }
   ]
 }

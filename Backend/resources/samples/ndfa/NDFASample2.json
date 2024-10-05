@@ -1,18 +1,13 @@
 {
   "nodes": [
     { "id": "0", "type": "initial" },
-    { "id": "3" },
-    { "id": "4" },
-    { "id": "5", "type": "accepting" },
     { "id": "1" },
-    { "id": "2" }
+    { "id": "2" },
+    { "id": "3", "type": "accepting" }
   ],
   "links": [
-    { "source": "0", "target": "3", "label": "ε" },
-    { "source": "3", "target": "4", "label": "b" },
-    { "source": "4", "target": "5", "label": "ε" },
-    { "source": "0", "target": "1", "label": "ε" },
-    { "source": "1", "target": "2", "label": "a" },
-    { "source": "2", "target": "5", "label": "ε" }
+    { "source": "0", "target": "1", "label": "a" },
+    { "source": "1", "target": "2", "label": "ε" },
+    { "source": "2", "target": "3", "label": "b" }
   ]
 }

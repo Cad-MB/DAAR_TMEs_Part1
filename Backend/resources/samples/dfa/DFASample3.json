@@ -1,11 +1,10 @@
 {
   "nodes": [
-    { "id": "4", "type": "initial" },
-    { "id": "5" },
-    { "id": "6", "type": "accepting" }
+    { "id": "4", "type": "initial", "type": "accepting" },
+    { "id": "5", "type": "accepting" }
   ],
   "links": [
     { "source": "4", "target": "5", "label": "a" },
-    { "source": "5", "target": "6", "label": "b" }
+    { "source": "5", "target": "5", "label": "a" }
   ]
 }

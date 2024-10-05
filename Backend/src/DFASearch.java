@@ -115,11 +115,11 @@ public class DFASearch {
                 }
             }
 
-            if (printLine) {
-                System.out.println(highlightedLineBuilder.toString());
-            }
             // If the line was modified and not already printed, print it
             if (lineModified && !printedLines.contains(highlightedLineBuilder.toString())) {
+                if (printLine) {
+                    System.out.println(highlightedLineBuilder.toString());
+                }
                 printedLines.add(highlightedLineBuilder.toString());
                 matchedLinesCount++;
             }
@@ -153,7 +153,7 @@ public class DFASearch {
             DFA minimizedDFA = DFAMinimization.minimize(dfa);
 
             // Read the file content into a String
-            String filename = "Backend/resources/texts/41011-0.txt";
+            String filename = "Backend/resources/texts/56667-0.txt";
             String text = readFile(filename);
 
             // Search for the pattern in the text and highlight lines containing it

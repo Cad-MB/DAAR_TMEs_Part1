@@ -1,15 +1,10 @@
 {
   "nodes": [
-    { "id": "8", "type": "initial" },
-    { "id": "9" },
-    { "id": "10" },
-    { "id": "11", "type": "accepting" }
+    { "id": "4", "type": "initial", "type": "accepting" },
+    { "id": "5", "type": "accepting" }
   ],
   "links": [
-    { "source": "8", "target": "9", "label": "a" },
-    { "source": "9", "target": "10", "label": "b" },
-    { "source": "10", "target": "10", "label": "b" },
-    { "source": "10", "target": "11", "label": "c" },
-    { "source": "9", "target": "11", "label": "c" }
+    { "source": "4", "target": "5", "label": "a" },
+    { "source": "5", "target": "5", "label": "a" }
   ]
 }

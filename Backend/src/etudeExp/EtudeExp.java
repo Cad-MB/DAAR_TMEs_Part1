@@ -33,6 +33,7 @@ public class EtudeExp {
             System.out.println("Testing word: " + word);
             int AutomatefoundWords = 0;
             ArrayList<String> matchingLines = new ArrayList<>();
+            BufferedReader reader = null;
             // Time Method 1
             long startTimeAutomate = System.currentTimeMillis();
 
@@ -51,7 +52,7 @@ public class EtudeExp {
                 AutomatefoundWords = DFASearch.highlightPatternInText(text, dfa, false);
 
             } catch (Exception e) {
-                System.err.println("Error in the automate method: " + e.getMessage());
+                System.err.println("Error in the Ahu-ullman method: " + e.getMessage());
             }
 
 
@@ -78,12 +79,44 @@ public class EtudeExp {
 
             long KMPTime = endTimeKMP - startTimeKMP;
 
+            // Testing the real `egrep` :
+            long startTimeEgrep = System.currentTimeMillis();
+
+            try {
+                // Create a process to execute egrep with the desired pattern and file
+                ProcessBuilder processBuilder = new ProcessBuilder("egrep", word, bookPath);
+
+                // Redirect the error stream to avoid issues
+                processBuilder.redirectErrorStream(true);
+
+                // Start the process and get the result
+                Process process = processBuilder.start();
+
+                // Capture the output of the command
+                reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+
+                // Wait for the process to finish
+                int exitCode = process.waitFor();
+                if (exitCode != 0) {
+                    System.err.println("egrep command failed with exit code: " + exitCode);
+                }
+
+            } catch (Exception e) {
+                System.err.println("Error in the egrep method: " + e.getMessage());
+            }
+
+            long endTimeEgrep = System.currentTimeMillis();
+
+            long EgrepTime = endTimeEgrep - startTimeEgrep;
+
             // Output results
             System.out.println("Method 1 (Automate) Time: " + AutomateTime + "ms");
-            System.out.println("Method 1 (KMP) Time: " + KMPTime + "ms");
+            System.out.println("Method 2 (KMP) Time: " + KMPTime + "ms");
+            System.out.println("Method 3 (egrep) Time: " + EgrepTime + "ms");
 
             // Optionally, save results to file for analysis later
-            saveResultsToFile(word, AutomateTime, AutomatefoundWords , KMPTime, matchingLines.size() );
+            saveResultsToFile(word, AutomateTime, AutomatefoundWords , KMPTime, matchingLines.size(), EgrepTime, reader );
         }
     }
 
@@ -106,17 +139,18 @@ public class EtudeExp {
         // Now append the results
         BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
 
-        writer.write("word,AutomateTime,isThereAWordAutomate,KMPTime,isThereAWordKMP\n");
+        writer.write("word,AutomateTime,isThereAWordAutomate,KMPTime,isThereAWordKMP,egrepTime,isThereAWordEgrep\n");
         writer.close();
     }
 
     // Method to save results to a CSV file
-    public static void saveResultsToFile(String word, long AutomateTime, int AutomatefoundWords, long KMPTime, int KMPfoundWords) throws IOException {
+    public static void saveResultsToFile(String word, long AutomateTime, int AutomatefoundWords, long KMPTime, int KMPfoundWords, long egrepTime, BufferedReader reader ) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter("Backend/src/etudeExp/results.csv", true));
 
         boolean isThereAWordAutomate = AutomatefoundWords > 0;
         boolean isThereAWordKMP = KMPfoundWords > 0;
-        writer.write(word + "," + AutomateTime + "," + isThereAWordAutomate + "," + KMPTime + "," + isThereAWordKMP);
+        boolean isThereAWordEgrep = reader != null;
+        writer.write(word + "," + AutomateTime + "," + isThereAWordAutomate + "," + KMPTime + "," + isThereAWordKMP + "," + egrepTime + "," + isThereAWordEgrep);
         writer.newLine();
         writer.close();
     }

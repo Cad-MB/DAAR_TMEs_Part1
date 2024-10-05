@@ -1,0 +1,14 @@
+word,AutomateTime,isThereAWordAutomate,KMPTime,isThereAWordKMP,egrepTime,isThereAWordEgrep
+Sagron,1084,false,52,false,10,true
+Sagon,576,false,30,false,6,true
+S(a|g|r)+on,570,true,55,false,3,true
+S(a|g|r)*on,602,true,56,false,4,true
+(S|s)(a|g|r)+on,639,true,67,false,5,true
+(S|s)(ag|ro|gr)+on,664,false,94,false,6,true
+(S|s)((ag|gr))*on,723,true,74,false,4,true
+(S(a|g|r)*o)+n,641,true,76,false,6,true
+(S|s)((a|r)|(g|r))on,656,false,80,false,5,true
+S(ag|gr)+on,602,false,61,false,4,true
+(S|s)((ag|gr)+|on)+,648,true,79,false,4,true
+S(a(g|r)+)+on,619,true,59,false,5,true
+(S|s)((a|g|r)+(on|g)+)+,656,true,113,false,5,true

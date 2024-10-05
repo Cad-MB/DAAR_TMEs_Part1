@@ -1,4 +1,4 @@
-package src.etudeExp;
+package etudeExp;
 import src.DFASearch;
 import src.dfa.DFA;
 import src.dfa.DFADeterminisation;
@@ -17,7 +17,7 @@ public class EtudeExp {
     public static void main(String[] args) throws IOException {
         // Path to the book text and test words
         String bookPath = "Backend/resources/texts/56667-0.txt";
-        String testWordsPath = "Backend/src/etudeExp/test_words.txt";
+        String testWordsPath = "Backend/etudeExp/test_words.txt";
 
         // Read the book text
         String text = readFile(bookPath);
@@ -123,7 +123,7 @@ public class EtudeExp {
     }
 
     public static void cleanupResultsFile()  throws IOException{
-        File file = new File("Backend/src/etudeExp/results.csv");
+        File file = new File("Backend/etudeExp/results.csv");
 
         // Check if the file exists and is not empty
         if (file.exists() && file.length() > 0) {
@@ -142,7 +142,7 @@ public class EtudeExp {
 
     // Method to save results to a CSV file
     public static void saveResultsToFile(String word, long AutomateTime, int AutomatefoundWords, long KMPTime, int KMPfoundWords, long egrepTime, BufferedReader reader ) throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter("Backend/src/etudeExp/results.csv", true));
+        BufferedWriter writer = new BufferedWriter(new FileWriter("Backend/etudeExp/results.csv", true));
 
         boolean isThereAWordAutomate = AutomatefoundWords > 0;
         boolean isThereAWordKMP = KMPfoundWords > 0;

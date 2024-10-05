@@ -1,0 +1,5 @@
+word,AutomateTime,isThereAWordAutomate,KMPTime,isThereAWordKMP,egrepTime,isThereAWordEgrep
+about,1325,true,74,true,12,true
+Sargon,753,true,46,true,5,true
+where,741,true,39,true,6,true
+foot(h|i)*,726,true,69,false,5,true

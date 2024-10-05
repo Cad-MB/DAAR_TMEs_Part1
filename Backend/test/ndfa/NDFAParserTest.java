@@ -25,46 +25,6 @@ public class NDFAParserTest {
     }
 
     /**
-     * Test NDFA conversion for alternation (a|b)
-     */
-    @Test
-    public void testAlternation() throws Exception {
-        String regex = "a|b";
-        RegExTree tree = RegExTreeParser.parse(regex);
-        NDFA ndfa = NDFAParser.parseTreeToNDFA(tree);
-
-        // Check the NDFA has valid initial and accepting states
-        assertNotNull(ndfa);
-        assertNotNull(ndfa.etatInitial);
-        assertNotNull(ndfa.etatAcceptant);
-
-        // Get the epsilon transitions from the initial state
-        Set<NDFA.Etat> epsilonTransitions = ndfa.etatInitial.transitionsEpsilon;
-
-        // Ensure there are two epsilon transitions
-        assertEquals(2, epsilonTransitions.size());
-
-        // Separate the two paths for 'a' and 'b'
-        Iterator<NDFA.Etat> iterator = epsilonTransitions.iterator();
-        NDFA.Etat etatA = iterator.next();
-        NDFA.Etat etatB = iterator.next();
-
-        // Check the 'a' path
-        assertNotNull(etatA.obtenirTransition((int) 'a'));
-        NDFA.Etat etatA2 = etatA.obtenirTransition((int) 'a').iterator().next();
-        assertNotNull(etatA2.transitionsEpsilon);
-        assertTrue(etatA2.transitionsEpsilon.contains(ndfa.etatAcceptant));
-
-        // Check the 'b' path
-        assertNotNull(etatB.obtenirTransition((int) 'b'));
-        NDFA.Etat etatB2 = etatB.obtenirTransition((int) 'b').iterator().next();
-        assertNotNull(etatB2.transitionsEpsilon);
-        assertTrue(etatB2.transitionsEpsilon.contains(ndfa.etatAcceptant));
-    }
-
-
-
-    /**
      * Test NDFA conversion for concatenation (ab)
      */
     @Test

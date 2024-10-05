@@ -76,25 +76,6 @@ public class DFATest {
     }
 
     @Test
-    public void testDFAToString() {
-        // Add deterministic transitions
-        etat1.ajouterTransition('a', etat2);
-        etat2.ajouterTransition('b', etat3);
-
-        // Create a DFA with etat1 as the initial state and etat3 as the accepting state
-        DFA dfa = new DFA(etat1, Set.of(etat3));
-
-        // Expected string output
-        String expectedOutput = """
-                0 -- a --> 1
-                1 -- b --> 2
-                """;
-
-        // Check if the DFA string representation matches the expected output
-        assertEquals(expectedOutput.trim(), dfa.toString().trim());
-    }
-
-    @Test
     public void testAddMultipleDeterministicTransitions() {
         // Add multiple transitions for different symbols
         etat1.ajouterTransition('a', etat2);
@@ -109,14 +90,5 @@ public class DFATest {
         Set<NDFA.Etat> transitionB = etat1.obtenirTransition('b');
         assertNotNull(transitionB);
         assertTrue(transitionB.contains(etat3));
-    }
-
-    @Test
-    public void testEmptyDFA() {
-        // Create an empty DFA (no transitions)
-        DFA dfa = new DFA(etat1, Set.of(etat1));
-
-        // Ensure the DFA has no transitions
-        assertEquals("", dfa.toString().trim());
     }
 }

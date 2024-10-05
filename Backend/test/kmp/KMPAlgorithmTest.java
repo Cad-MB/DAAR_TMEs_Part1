@@ -2,7 +2,7 @@ package test.kmp;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import src.kmp.KMPAlgorithm;
+import src.KMPAlgorithm;
 
 class KMPAlgorithmTest {
 

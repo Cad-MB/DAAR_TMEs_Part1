@@ -2,7 +2,7 @@ package etudeExp;
 import src.DFASearch;
 import src.dfa.DFA;
 import src.dfa.DFADeterminisation;
-import src.kmp.KMPAlgorithm;
+import src.KMPAlgorithm;
 import src.minimization.DFAMinimization;
 import src.ndfa.NDFA;
 import src.ndfa.NDFAParser;

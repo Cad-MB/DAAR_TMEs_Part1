@@ -1,7 +1,7 @@
 package test.search;
 
 import org.junit.jupiter.api.Test;
-import src.kmp.KMPAlgorithm;
+import src.KMPAlgorithm;
 import src.DFASearch;
 import src.dfa.DFA;
 import src.regex.RegExTree;

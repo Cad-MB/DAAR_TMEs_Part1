@@ -7,12 +7,11 @@ import src.ndfa.NDFA;
 import src.regex.RegExTree;
 import src.regex.RegExTreeParser;
 import src.ndfa.NDFAParser;
-import src.kmp.KMPAlgorithm;
 
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.Scanner;
 
+// A main class that we can test be executing the jar and giving the methode, regex-pattern and the filename as params to the command.
 public class Main {
     public static void main(String[] args) {
         if (args.length < 3) {

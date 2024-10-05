@@ -1,8 +1,5 @@
 # Clone de egrep avec support partiel des ERE.
 
-## cloner le projet
-> git clone https://github.com/Cad-MB/DAAR_TMEs_Part1.git
-
 ## Exécuter le projet
 Dans la racine du projet il y a l'exécutable `projet1.jar`, la commande d'exécution est la suivante:
 > `java -jar projet1.jar [methode]  [pattern]  [file]`

@@ -98,9 +98,6 @@ public class EtudeExp {
 
                 // Wait for the process to finish
                 int exitCode = process.waitFor();
-                if (exitCode != 0) {
-                    System.err.println("egrep command failed with exit code: " + exitCode);
-                }
 
             } catch (Exception e) {
                 System.err.println("Error in the egrep method: " + e.getMessage());

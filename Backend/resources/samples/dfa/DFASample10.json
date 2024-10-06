@@ -1,0 +1,30 @@
+{
+  "nodes": [
+    { "id": "18", "type": "initial" },
+    { "id": "19" },
+    { "id": "20" },
+    { "id": "22" },
+    { "id": "21" },
+    { "id": "23" },
+    { "id": "24", "type": "accepting" }
+  ],
+  "links": [
+    { "source": "18", "target": "19", "label": "S" },
+    { "source": "19", "target": "20", "label": "a" },
+    { "source": "20", "target": "20", "label": "a" },
+    { "source": "20", "target": "22", "label": "r" },
+    { "source": "22", "target": "20", "label": "a" },
+    { "source": "22", "target": "22", "label": "r" },
+    { "source": "22", "target": "21", "label": "g" },
+    { "source": "21", "target": "20", "label": "a" },
+    { "source": "21", "target": "22", "label": "r" },
+    { "source": "21", "target": "21", "label": "g" },
+    { "source": "21", "target": "23", "label": "o" },
+    { "source": "23", "target": "24", "label": "n" },
+    { "source": "22", "target": "23", "label": "o" },
+    { "source": "20", "target": "21", "label": "g" },
+    { "source": "20", "target": "23", "label": "o" },
+    { "source": "19", "target": "22", "label": "r" },
+    { "source": "19", "target": "21", "label": "g" }
+  ]
+}

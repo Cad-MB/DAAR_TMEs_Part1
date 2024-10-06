@@ -1,0 +1,13 @@
+Sagron
+Sagon
+S(a|g|r)+on
+S(a|g|r)*on
+(S|s)(a|g|r)+on
+(S|s)(ag|ro|gr)+on
+(S|s)((ag|gr))*on
+(S(a|g|r)*o)+n
+(S|s)((a|r)|(g|r))on
+S(ag|gr)+on
+(S|s)((ag|gr)+|on)+
+S(a(g|r)+)+on
+(S|s)((a|g|r)+(on|g)+)+

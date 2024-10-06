@@ -9,7 +9,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * The {@code NDFAGenerator} class reads regular expressions from a CSV-like file,

@@ -1,12 +1,15 @@
 # Clone de egrep avec support partiel des ERE.
 
 ## Exécuter le projet
+Le jar remplace le Makefile!
+
 Dans la racine du projet il y a l'exécutable `projet1.jar`, la commande d'exécution est la suivante:
 > `java -jar projet1.jar [methode]  [pattern]  [file]`
 
 - [methode] : String of ["automate" ou "kmp"]
 - [pattern] : String
 - [file] : String
+
 
 ### Exemple: 
 Pour chercher avec la méthode d'ahu-ullman : 

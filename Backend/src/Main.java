@@ -13,6 +13,10 @@ import java.nio.file.Paths;
 
 // A main class that we can test be executing the jar and giving the methode, regex-pattern and the filename as params to the command.
 public class Main {
+    public static final String GREEN = "\u001B[32m";
+    public static final String BOLD = "\033[1m";   // Bold text
+    public static final String RESET = "\u001B[0m";
+
     public static void main(String[] args) {
         if (args.length < 3) {
             System.out.println("Usage: java -jar myprogram.jar <method> <regex-pattern> <filename>");
@@ -75,6 +79,6 @@ public class Main {
             String highlightedLine = line.replace(regex, KMPAlgorithm.GREEN + regex + KMPAlgorithm.RESET);
             System.out.println(highlightedLine);
         }
-        System.out.println(matchingLines.size() + " lines found.");
+        System.out.println("There are " + GREEN + BOLD + matchingLines.size() + RESET + " Matched lines");
     }
 }
